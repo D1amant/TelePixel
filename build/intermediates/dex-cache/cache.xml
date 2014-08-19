@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/var/www/TelePixel/app/build/intermediates/pre-dexed/debug/picasso-2.3.3-7bf26721f30f15579fef6ccaa4cf75cf7d707017.jar"
+        jar="/var/www/TelePixel/app/libs/picasso-2.3.3.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="1262995965440e28ba5c4d480c9c9ab4ccce84cc"/>
+    <item
+        dex="/var/www/TelePixel/app/build/intermediates/pre-dexed/debug/ion-1.3.7-db225f4f465653ab30e5bfa9d65f3165b39d5fcf.jar"
+        jar="/var/www/TelePixel/app/libs/ion-1.3.7.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="0b7a142131c1296dca7334031a75d35a64356845"/>
+    <item
+        dex="/var/www/TelePixel/app/build/intermediates/pre-dexed/debug/androidasync-1.3.7-1782e98652b2267aa1ac0f39bf133fd0cbc4e057.jar"
+        jar="/var/www/TelePixel/app/libs/androidasync-1.3.7.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="42d0cb938a7a2843f1d4ba7ef5840d38ba17e595"/>
+    <item
+        dex="/var/www/TelePixel/app/build/intermediates/pre-dexed/debug/gson-2.2.4-8b3ae9a713432349afc611f654beaf6800de3670.jar"
+        jar="/var/www/TelePixel/app/libs/gson-2.2.4.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="973e832af433b44c3ed11c426f2f390b29f3f3f8"/>
+    <item
+        dex="/var/www/TelePixel/app/build/intermediates/pre-dexed/debug/android-support-v13-4c1d3edece535ea26d29f117fb4ecdb02fd426a6.jar"
+        jar="/var/www/TelePixel/app/libs/android-support-v13.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="f5fa2183e286730a81f3076f19022539902a24f3"/>
+    <item
+        dex="/var/www/TelePixel/app/build/intermediates/pre-dexed/debug/gson-2.2.4-javadoc-79565bb9f08a2d3283d20e933af048db1a360086.jar"
+        jar="/var/www/TelePixel/app/libs/gson-2.2.4-javadoc.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="be47c2ee6e9ab0668874e4c6c4933c0637f473d8"/>
+    <item
+        dex="/var/www/TelePixel/app/build/intermediates/pre-dexed/debug/gson-2.2.4-sources-aae178cbcf83a89b6858dc8781feac373a13db9e.jar"
+        jar="/var/www/TelePixel/app/libs/gson-2.2.4-sources.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="10ab84ba225b583b10713f57c04270c918ef162b"/>
+    <item
+        dex="/var/www/TelePixel/app/build/intermediates/pre-dexed/debug/android-support-v4-9dba38470a62319fb1ffdfb7087ba7bdc488223d.jar"
+        jar="/var/www/TelePixel/app/libs/android-support-v4.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="ded9acc6a9792b8f1afc470f0c9cd36d178914cd"/>
+
+</pre-dex-items>
