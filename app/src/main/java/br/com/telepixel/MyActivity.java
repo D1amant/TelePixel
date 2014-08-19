@@ -43,11 +43,6 @@ public class MyActivity extends Activity implements ActionBar.TabListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
-
-
-
-
-
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -130,7 +125,7 @@ public class MyActivity extends Activity implements ActionBar.TabListener {
 
         @Override
         public Fragment getItem(int position) {
-            Fragment fragment = new Fragment();
+            Fragment fragment = new EstabFrag();
             switch (position){
                 case 0:
                     fragment = new EstabFrag();

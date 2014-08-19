@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class EstabFrag extends Fragment {
     List<Estabelecimento> list;
     ListView listView;
     View view;
-
+    ProgressBar p;
     public EstabFrag() {
         // Required empty public constructor
     }
@@ -34,12 +35,9 @@ public class EstabFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_estabelecimento, container, false);
-         listView = (ListView) view.findViewById(R.id.listViewEstab);
-
+        listView = (ListView) view.findViewById(R.id.listViewEstab);
+        p = (ProgressBar) view.findViewById(R.id.progressBarEstab);
         Log.i("OnStat", "passou");
-
-
-
 
         return view;
     }
@@ -62,7 +60,12 @@ public class EstabFrag extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        EstabAdapter estabAdapter = new EstabAdapter(getActivity().getApplicationContext(),list);
-        listView.setAdapter(estabAdapter);
-    }
+        if(list.size() > 0) {
+            p.setVisibility(View.GONE);
+            EstabAdapter estabAdapter = new EstabAdapter(getActivity().getApplicationContext(), list);
+            listView.setAdapter(estabAdapter);
+        }else {
+
+        }
+     }
 }

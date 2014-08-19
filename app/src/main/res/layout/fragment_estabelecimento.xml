@@ -5,7 +5,13 @@
     tools:context="com.br.telepix.EstabelecimentoFragment"
 
     >
-
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBarEstab"
+        android:layout_gravity="center"
+        />
 
     <ListView
         android:layout_width="match_parent"
@@ -20,5 +26,7 @@
         android:padding="5dp"
 
         />
+
+
 
 </FrameLayout>

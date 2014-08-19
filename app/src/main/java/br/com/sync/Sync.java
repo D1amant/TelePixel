@@ -1,8 +1,7 @@
 package br.com.sync;
 
 import android.content.Context;
-import android.util.Log;
-
+import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -14,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.entidades.Estabelecimento;
+import br.com.telepixel.R;
 
 /**
  * Created by diamante on 09/08/14.
@@ -66,8 +66,10 @@ public class Sync  {
                                                             }
                                                         } catch (JSONException e1) {
                                                             e1.printStackTrace();
+                                                            Toast.makeText(context, context.getResources().getString(R.string.erroServer),Toast.LENGTH_LONG).show();
                                                         }catch (NullPointerException e1){
                                                             e1.printStackTrace();
+                                                            Toast.makeText(context, context.getResources().getString(R.string.erroServer),Toast.LENGTH_LONG).show();
                                                         }
                                                     }
                                                 });
