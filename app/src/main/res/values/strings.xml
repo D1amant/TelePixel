@@ -13,5 +13,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="erroServer">Servidor não encontrado</string>
+    <string name="erroDadosNaoEncontrados">Dados não encontrados</string>
+    <string name="servidor">http://192.168.0.67/</string>
+    <string name="servidorEstabelecimento">http://192.168.0.67/serverPHP/sync/syncEstab.php</string>
 
 </resources>

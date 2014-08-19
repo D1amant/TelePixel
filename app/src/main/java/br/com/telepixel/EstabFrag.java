@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class EstabFrag extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Sync sync = new Sync(getActivity().getBaseContext(), "http://192.168.0.67/serverPHP/sync/syncEstab.php", null);
+        Sync sync = new Sync(getActivity().getBaseContext(), getActivity().getBaseContext().getResources().getString(R.string.servidorEstabelecimento), null);
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
@@ -65,7 +66,7 @@ public class EstabFrag extends Fragment {
             EstabAdapter estabAdapter = new EstabAdapter(getActivity().getApplicationContext(), list);
             listView.setAdapter(estabAdapter);
         }else {
-
+            Toast.makeText(getActivity().getBaseContext(),getActivity().getBaseContext().getResources().getString(R.string.erroDadosNaoEncontrados), Toast.LENGTH_LONG).show();
         }
      }
 }
