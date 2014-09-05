@@ -9,19 +9,33 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+
+import br.com.entidades.Estabelecimento;
 
 
 public class MyActivity extends Activity implements ActionBar.TabListener {
 
-
+    List<Estabelecimento> list;
     String calssName = "MyActivity";
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -38,9 +52,13 @@ public class MyActivity extends Activity implements ActionBar.TabListener {
      */
     ViewPager mViewPager;
 
+    List<Estabelecimento> estabelecimentoArrayList = new ArrayList<Estabelecimento>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_my);
 
         // Set up the action bar.
@@ -58,7 +76,9 @@ public class MyActivity extends Activity implements ActionBar.TabListener {
         // When swiping between different sections, select the corresponding
         // tab. We can also use ActionBar.Tab#select() to do this if we have
         // a reference to the Tab.
+
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+
             @Override
             public void onPageSelected(int position) {
                 actionBar.setSelectedNavigationItem(position);
@@ -76,7 +96,83 @@ public class MyActivity extends Activity implements ActionBar.TabListener {
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+
+
+        ProgressBar p = new ProgressBar(this);
+
+
+        Ion.with(this)
+                .load(getResources().getString(R.string.servidorEstabelecimento))
+                .progressBar(p)
+                .asString().setCallback(new
+                                                FutureCallback<String>() {
+
+
+                                                    @Override
+                                                    public void onCompleted(Exception e, String result) {
+
+                                                        try {
+                                                            JSONArray jsonArray = new JSONArray(result);
+                                                            Estabelecimento p;
+
+                                                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                                                p = new Estabelecimento();
+
+                                                                int id = Integer.parseInt(jsonArray.getJSONObject(i).getString("id"));
+
+                                                                p.setId(id);
+                                                                p.setNome(jsonArray.getJSONObject(i).getString("nome"));
+                                                                // p.setTelefone(jsonArray.getJSONObject(i).getString("telefone"));
+                                                                // p.setEndereco(jsonArray.getJSONObject(i).getString("endereco"));
+                                                                p.setTipo(jsonArray.getJSONObject(i).getString("tipo"));
+                                                                p.setDescricao(jsonArray.getJSONObject(i).getString("descricao"));
+                                                                p.setImagem(jsonArray.getJSONObject(i).getString("imagem"));
+
+                                                                estabelecimentoArrayList.add(p);
+
+                                                            }
+
+
+
+
+
+                                                        } catch (JSONException e1) {
+                                                            Log.e("errro" , e1.toString());
+                                                            // Toast.makeText(this, getBaseContext().getResources().getString(R.string.erroDadosNaoEncontrados), Toast.LENGTH_LONG).show();
+                                                        }catch (NullPointerException e1){
+                                                            Log.e("errro2" , e1.toString());
+                                                            // Toast.makeText(this, getResources().getString(R.string.erroServer),Toast.LENGTH_LONG).show();
+                                                        }
+                                                        Fragment   fragment = new EstabFrag(estabelecimentoArrayList);
+
+
+//                                                        getFragmentManager().beginTransaction().
+//                                                                remove(getFragmentManager().findFragmentByTag("EstabFrag")).commit();
+
+                                                        getFragmentManager()
+                                                                .beginTransaction()
+                                                                .replace(R.id.estabFrag, fragment)
+                                                                .addToBackStack(null) // enables back key
+                                                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE) // if you need transition
+                                                                .commit();
+
+
+
+                                                    }
+                                                });
+
+
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+
+    }
+
 
 
     @Override
@@ -118,6 +214,15 @@ public class MyActivity extends Activity implements ActionBar.TabListener {
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
+        Fragment fragment;
+
+        public Fragment getFragment() {
+            return fragment;
+        }
+
+        public void setFragment(Fragment fragment) {
+            this.fragment = fragment;
+        }
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -125,10 +230,11 @@ public class MyActivity extends Activity implements ActionBar.TabListener {
 
         @Override
         public Fragment getItem(int position) {
-            Fragment fragment = new EstabFrag();
+            fragment = new Fragment();
             switch (position){
                 case 0:
-                    fragment = new EstabFrag();
+                    fragment = new EstabFrag(estabelecimentoArrayList);
+
                     return fragment;
                 case 1:
                     fragment = new Historico();
@@ -136,6 +242,8 @@ public class MyActivity extends Activity implements ActionBar.TabListener {
                 case 2:
                     fragment = new Pedidos();
                     return fragment;
+                case 3:
+                    fragment = new EstabFrag(estabelecimentoArrayList);
             }
 
 
@@ -163,38 +271,7 @@ public class MyActivity extends Activity implements ActionBar.TabListener {
         }
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_my, container, false);
-            return rootView;
-        }
-    }
 
 
     @Override

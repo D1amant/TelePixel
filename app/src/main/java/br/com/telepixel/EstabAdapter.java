@@ -25,12 +25,13 @@ public class EstabAdapter extends ArrayAdapter {
 
     private  Context context;
     private List<Estabelecimento> list;
-
-    public EstabAdapter(Context context , List<Estabelecimento> list) {
+    private String serverUrl;
+    public EstabAdapter(Context context , List<Estabelecimento> list ,String serverUrl) {
 
         super(context,0, list);
         this.context = context;
         this.list = list;
+        this.serverUrl = serverUrl;
 
     }
 
@@ -52,7 +53,7 @@ public class EstabAdapter extends ArrayAdapter {
                titulo.setText(this.list.get(0).getNome().toString());
                tipo.setText(this.list.get(0).getTipo().toString());
                descricao.setText(this.list.get(0).getDescricao().toString());
-               Picasso.with(context).load("http://192.168.0.67"+this.list.get(0).getImagem().toString()).into(imageView);
+               Picasso.with(context).load(this.serverUrl+this.list.get(0).getImagem().toString()).into(imageView);
 
            }
 
